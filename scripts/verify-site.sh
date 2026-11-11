@@ -132,4 +132,15 @@ grep -q 'class="seo-fallback"' "$INDEX" \
 grep -q '<a href="/docs/">' "$INDEX" \
   || fail "index.html 缺少指向 /docs/ 的可抓取链接"
 
+# ---------------------------------------------------------------------------
+# 7. 第三方域名校验：/.well-known/
+# ---------------------------------------------------------------------------
+# Vercount 会直接请求域名根目录下的校验文件，路径前缀不能带 /docs。
+VERCOUNT_VERIFY="$SITE_DIR/.well-known/vercount-verify-zfm1b432m9ou3d0rn0xa6xpz.txt"
+[ -f "$VERCOUNT_VERIFY" ] \
+  || fail "缺少 .well-known/vercount-verify-zfm1b432m9ou3d0rn0xa6xpz.txt（应位于域名根目录）"
+grep -qxF 'vercount-domain-verify=designable-antd.bugduo.com,zfm1b432m9ou3d0rn0xa6xpz' \
+  "$VERCOUNT_VERIFY" \
+  || fail "vercount 校验文件内容不正确"
+
 info "校验通过：${SITE_DIR}（$(find "$SITE_DIR" -type f | wc -l | tr -d ' ') 个文件）"

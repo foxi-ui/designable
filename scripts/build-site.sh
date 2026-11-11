@@ -66,13 +66,18 @@ info "复制构建产物到 $OUT_DIR"
 cp -R "$PLAYGROUND_BUILD/." "$OUT_DIR/"
 
 # ---------------------------------------------------------------------------
-# 5. 写入站点根目录的 SEO 文件
+# 5. 写入站点根目录的 SEO 与第三方校验文件
 # ---------------------------------------------------------------------------
 # robots.txt 必须位于域名根目录；文档站自身的 sitemap 由 VitePress 生成到
 # /docs/sitemap.xml，这里的 sitemap.xml 只负责 playground 首页。
 info "写入 robots.txt 与根 sitemap.xml"
 cp "$ROOT_DIR/scripts/static/robots.txt" "$OUT_DIR/robots.txt"
 cp "$ROOT_DIR/scripts/static/sitemap.xml" "$OUT_DIR/sitemap.xml"
+
+# /.well-known/ 下的域名校验文件同样必须位于域名根目录（Vercount 等第三方服务
+# 会直接请求该路径），handbook 的 public 目录只能写到 /docs/，因此放在这里。
+info "写入 .well-known 校验文件"
+cp -R "$ROOT_DIR/scripts/static/.well-known" "$OUT_DIR/.well-known"
 
 # ---------------------------------------------------------------------------
 # 6. 校验产物

@@ -271,6 +271,7 @@ playground 是单页应用，但只有 `/` 一个路由，不存在深链接问�
 | `/docs/sitemap.xml`      | VitePress `sitemap` 配置               | 由构建生成，包含全部文档页                      |
 | `/docs/*.html` canonical | `transformHead`                        | 每页指向自身的规范 URL                          |
 | `/` 首页静态正文         | `formily/antd/playground/template.ejs` | CSR 之外的 h1、描述与 `/docs/` 链接             |
+| `/.well-known/*`         | `scripts/static/.well-known/`          | 第三方域名校验文件，必须位于域名根目录          |
 
 `scripts/verify-site.sh` 与 `scripts/verify-docs.sh` 会校验上述内容，
 缺失时 CI 直接失败，避免 SEO 配置被后续改动破坏。
