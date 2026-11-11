@@ -1,0 +1,6 @@
+.vitepress/cache/
+.vitepress/dist/
+node_modules/
+
+# 根 .gitignore 默认忽略 package-lock.json；文档站需要提交它供 CI 使用
+!package-lock.json
