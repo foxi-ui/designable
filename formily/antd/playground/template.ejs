@@ -3,18 +3,84 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
-    Designable Playground
-  </title>
+  <title>Designable Ant Design 表单设计器 Playground</title>
+  <meta name="description" content="Designable Ant Design 表单设计器在线 Playground：基于 Formily 的拖拽式表单设计器，支持物料注册、组件拖拽、属性设置、JSON Schema 导出与实时预览，可直接在浏览器中体验。">
+  <link rel="canonical" href="https://designable-antd.bugduo.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Designable Ant Design 表单设计器 Playground">
+  <meta property="og:description" content="基于 Formily 的拖拽式表单设计器在线体验：物料注册、组件拖拽、属性设置、JSON Schema 导出与实时预览。">
+  <meta property="og:url" content="https://designable-antd.bugduo.com/">
+  <meta property="og:site_name" content="Designable">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Designable Ant Design 表单设计器",
+      "url": "https://designable-antd.bugduo.com/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "description": "基于 Formily 的拖拽式表单设计器在线 Playground，支持物料注册、属性设置与 JSON Schema 导出。"
+    }
+  </script>
   <style>
     html,body{
       user-select: none;
       -webkit-user-select: none;
     }
+    #root{
+      min-height: 100vh;
+    }
+    /* JS 加载前/加载失败时展示的静态内容，React 挂载后会替换 #root。 */
+    .seo-fallback{
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 24px;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: #1f2328;
+      text-align: center;
+      background: #f5f7fa;
+    }
+    .seo-fallback h1{
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .seo-fallback p{
+      max-width: 560px;
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #57606a;
+    }
+    .seo-fallback a{
+      color: #2f54eb;
+      font-size: 15px;
+    }
+    .seo-fallback .loading{
+      font-size: 13px;
+      color: #8c959f;
+    }
   </style>
 </head>
 <body>
   <div id="root">
+    <main class="seo-fallback">
+      <h1>Designable Ant Design 表单设计器</h1>
+      <p>
+        基于 Formily 的拖拽式表单设计器在线 Playground。你可以拖拽物料搭建表单、
+        调整组件属性、查看实时预览，并导出 Formily JSON Schema。
+      </p>
+      <a href="/docs/">阅读 Designable 开发者手册</a>
+      <span class="loading">正在加载设计器…</span>
+    </main>
   </div>
   <!--
     These dependencies are webpack externals (see webpack.base.ts) and must be

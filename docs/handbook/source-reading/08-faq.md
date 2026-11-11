@@ -1,6 +1,6 @@
 ---
-title: 常见问题
-description: Designable 使用中的常见问题与原因。
+title: 常见问题与解决思路
+description: 汇总 Designable 使用中的常见问题：外链依赖、官方文档进度、自定义组件经验、与阿里 lowcode-engine 的区别、远程数据源接入和响应器联动等，并给出思路与参考实现。
 outline: deep
 ---
 

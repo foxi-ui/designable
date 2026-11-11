@@ -1,6 +1,6 @@
 ---
-title: 「表单设计器开发指南」的内容补充
-description: 对官方《表单设计器开发指南》的补充说明。
+title: 表单设计器开发指南补充
+description: 补充官方《表单设计器开发指南》未展开的内容：@designable/react 的面板与 Widgets、@designable/shared 的工具函数，以及 @designable/react-settings-form 的自定义扩展方式。
 outline: deep
 ---
 

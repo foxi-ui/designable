@@ -1,6 +1,6 @@
 ---
 title: 架构与对象模型
-description: Engine、Workbench、Workspace、Operation 与视图层的关系。
+description: 梳理 Engine、Workbench、Workspace、Operation、TreeNode 与视图层之间的关系，理解 Designable 核心对象模型，以及事件驱动、选中、拖拽和撤销重做在架构中的位置与协作方式。
 outline: deep
 ---
 
@@ -24,6 +24,8 @@ outline: deep
 
 ```mermaid
 flowchart TD
+  accTitle: Designable 核心对象关系
+  accDescr: Engine 派生 Workbench、Screen、Cursor 和 Keyboard；Workbench 管理多个 Workspace；每个 Workspace 包含 Operation、Viewport、Outline 和 History；Operation 管理 TreeNode 树、选中、悬停、移动与变换辅助对象。
   E["Engine"] --> W["Workbench"]
   E --> S["Screen"]
   E --> C["Cursor"]

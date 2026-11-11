@@ -259,3 +259,44 @@ playground 是单页应用，但只有 `/` 一个路由，不存在深链接问�
   - `ts-loader` / `less-loader` / `url-loader` 等旧 loader 的兼容性
 - 如未来升级 webpack 5，需要重新验证 `monaco-editor-webpack-plugin`、
   `html-webpack-plugin`、`mini-css-extract-plugin` 与 externals 行为。
+
+## 13. SEO 配置
+
+### 13.1 产物中的 SEO 文件
+
+| 文件                     | 来源                                   | 说明                                            |
+| ------------------------ | -------------------------------------- | ----------------------------------------------- |
+| `/robots.txt`            | `scripts/static/robots.txt`            | 由 `build-site.sh` 写入根目录，声明两个 sitemap |
+| `/sitemap.xml`           | `scripts/static/sitemap.xml`           | 仅包含 playground 首页                          |
+| `/docs/sitemap.xml`      | VitePress `sitemap` 配置               | 由构建生成，包含全部文档页                      |
+| `/docs/*.html` canonical | `transformHead`                        | 每页指向自身的规范 URL                          |
+| `/` 首页静态正文         | `formily/antd/playground/template.ejs` | CSR 之外的 h1、描述与 `/docs/` 链接             |
+
+`scripts/verify-site.sh` 与 `scripts/verify-docs.sh` 会校验上述内容，
+缺失时 CI 直接失败，避免 SEO 配置被后续改动破坏。
+
+### 13.2 搜索引擎提交
+
+1. **Google Search Console**
+   - 添加资源 `https://designable-antd.bugduo.com`。
+   - 通过 DNS TXT 或 HTML 文件完成验证。
+   - 提交 `https://designable-antd.bugduo.com/sitemap.xml` 与
+     `https://designable-antd.bugduo.com/docs/sitemap.xml`。
+2. **Bing Webmaster Tools**
+   - 可直接从 Google Search Console 导入站点与 sitemap。
+3. **百度搜索资源平台**
+   - 百度验证尚未接入。需要先在 `bugduo.com` DNS 添加百度提供的 TXT 记录，
+     或在站点根目录放置 `baidu_verify_*.html`。
+   - 验证通过后提交两个 sitemap，并使用「普通收录 → API 提交」推送新页面。
+   - 注意：百度对未备案的境外托管站点收录不稳定，GitHub Pages +
+     `bugduo.com` 的收录效果取决于主域备案与访问情况。
+
+### 13.3 新增页面时
+
+新增 Markdown 页面后：
+
+1. 在 frontmatter 中补 `title`（约 10–16 个汉字）与
+   `description`（约 70–100 个汉字），保证全站唯一。
+2. 在 `.vitepress/config.ts` 的 `sidebar` 中添加入口，保证从首页 2 次点击内可达。
+3. 执行 `npm run build`，确认 `sitemap.xml` 与 canonical 自动更新。
+4. 重新提交 sitemap。

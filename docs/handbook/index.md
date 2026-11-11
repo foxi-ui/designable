@@ -1,4 +1,7 @@
 ---
+title: Designable 开发者手册：表单设计器接入指南
+description: 从 createDesigner 到 SchemaField，系统讲解 Designable 表单设计器的对象模型、生命周期、物料注册、React 层与 Formily 集成，附源码阅读系列与实战配方，帮助你在真实项目中完成接入和二次开发。
+titleTemplate: false
 layout: home
 
 hero:
@@ -47,6 +50,8 @@ features:
 
 ```mermaid
 flowchart LR
+  accTitle: Designable 主线数据流
+  accDescr: 从 createDesigner() 创建 Engine，依次经过 Workbench、Workspace、Operation 和 TreeNode 组件树，再转换为 Formily JSON Schema，最后由 SchemaField 运行时渲染。
   A["createDesigner()"] --> B["Engine"]
   B --> C["Workbench"]
   C --> D["Workspace"]

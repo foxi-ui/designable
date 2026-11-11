@@ -1,6 +1,6 @@
 ---
 title: Formily 集成
-description: TreeNode 与 JSON Schema 互转、SchemaField 渲染与设置面板。
+description: 讲解 TreeNode 与 Formily JSON Schema 的双向转换、SchemaField 运行时渲染，以及 DataSourceSetter、ReactionsSetter、ValidatorSetter 等设置面板的接入方式与常见配置。
 outline: deep
 ---
 

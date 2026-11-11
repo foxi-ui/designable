@@ -40,6 +40,12 @@ while IFS= read -r ref; do
   asset="${asset#./}"
   asset="${asset#/}"
 
+  # 页面链接（如 /docs/）不是静态资源，跳过；只校验带扩展名的文件。
+  case "${asset##*/}" in
+    *.*) ;;
+    *) continue ;;
+  esac
+
   case "$asset" in
     *.js) js_count=$((js_count + 1)) ;;
     *.css) css_count=$((css_count + 1)) ;;
@@ -101,5 +107,29 @@ grep -qi '<meta charset="utf-8"' "$INDEX" \
 if grep -qE 'unpkg\.com/(react|react-dom|antd|moment)/' "$INDEX"; then
   fail "index.html 中的 unpkg 链接未固定版本"
 fi
+
+# ---------------------------------------------------------------------------
+# 6. SEO：首页元数据、robots.txt、根 sitemap.xml
+# ---------------------------------------------------------------------------
+[ -f "$SITE_DIR/robots.txt" ] || fail "缺少 robots.txt（应位于域名根目录）"
+grep -q '^Sitemap:' "$SITE_DIR/robots.txt" \
+  || fail "robots.txt 未声明 Sitemap"
+
+[ -f "$SITE_DIR/sitemap.xml" ] || fail "缺少根 sitemap.xml"
+grep -q '<loc>https://designable-antd.bugduo.com/</loc>' "$SITE_DIR/sitemap.xml" \
+  || fail "根 sitemap.xml 未包含首页 URL"
+
+grep -qE '<title>[^<[:space:]][^<]*</title>' "$INDEX" \
+  || fail "index.html 缺少非空 <title>"
+grep -q '<meta name="description" content="[^"]\{20,\}"' "$INDEX" \
+  || fail "index.html 缺少足够长的 meta description"
+grep -q '<link rel="canonical" href="https://designable-antd.bugduo.com/">' "$INDEX" \
+  || fail "index.html 缺少 self canonical"
+
+# 首页是 CSR 应用：必须保留可抓取的静态正文与指向 /docs/ 的普通链接。
+grep -q 'class="seo-fallback"' "$INDEX" \
+  || fail "index.html 缺少 JS 加载前/无 JS 时的静态正文"
+grep -q '<a href="/docs/">' "$INDEX" \
+  || fail "index.html 缺少指向 /docs/ 的可抓取链接"
 
 info "校验通过：${SITE_DIR}（$(find "$SITE_DIR" -type f | wc -l | tr -d ' ') 个文件）"

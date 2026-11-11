@@ -1,6 +1,6 @@
 ---
 title: 实战 Recipes
-description: 自定义物料、设置面板、多工作区、iframe 沙箱、主题与国际化。
+description: 汇总可直接复用的实战配方：自定义物料、设置面板、多工作区、iframe 沙箱、主题定制与国际化。每个配方都给出最小可运行示例和关键源码位置，方便按需组合到自己的项目。
 outline: deep
 ---
 

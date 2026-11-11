@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://designable-antd.bugduo.com/sitemap.xml
+Sitemap: https://designable-antd.bugduo.com/docs/sitemap.xml

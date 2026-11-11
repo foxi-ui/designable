@@ -3,33 +3,64 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const repo = 'https://github.com/foxi-ui/designable'
 
+// 文档站与 playground 同域部署：playground 在根目录，文档在 /docs/。
+const SITE_ORIGIN = 'https://designable-antd.bugduo.com'
+const DOCS_BASE = '/docs/'
+const DOCS_URL = `${SITE_ORIGIN}${DOCS_BASE}`
+
+// 将 Markdown 相对路径转换为部署后的路由：
+// index.md -> ''，architecture.md -> 'architecture.html'，
+// source-reading/index.md -> 'source-reading/'
+function toRoute(relativePath: string) {
+  return relativePath
+    .replace(/(^|\/)index\.md$/, '$1')
+    .replace(/\.md$/, '.html')
+}
+
 export default withMermaid(
   defineConfig({
     lang: 'zh-CN',
     title: 'Designable 开发者手册',
     description:
       '从零接入 Designable 表单设计器：对象模型、生命周期、物料注册与 Formily 集成。',
-    base: '/docs/',
+    base: DOCS_BASE,
     srcExclude: ['README.md'],
     lastUpdated: true,
+    // 输出 docs/sitemap.xml；hostname 以 / 结尾，VitePress 会按相对路由拼接。
+    sitemap: {
+      hostname: DOCS_URL,
+    },
+    // 为每页注入 self canonical 与页面级 Open Graph 信息。
+    transformHead(ctx) {
+      if (ctx.pageData.relativePath === '404.md') {
+        return [['meta', { name: 'robots', content: 'noindex' }]]
+      }
+
+      const route = toRoute(ctx.pageData.relativePath)
+      const canonical = `${DOCS_URL}${route}`
+
+      return [
+        ['link', { rel: 'canonical', href: canonical }],
+        [
+          'meta',
+          {
+            property: 'og:type',
+            content: route === '' ? 'website' : 'article',
+          },
+        ],
+        ['meta', { property: 'og:title', content: ctx.title }],
+        ['meta', { property: 'og:description', content: ctx.description }],
+        ['meta', { property: 'og:url', content: canonical }],
+        [
+          'meta',
+          { property: 'og:site_name', content: 'Designable 开发者手册' },
+        ],
+        ['meta', { property: 'og:locale', content: 'zh_CN' }],
+        ['meta', { name: 'twitter:card', content: 'summary' }],
+      ]
+    },
     head: [
       ['meta', { name: 'theme-color', content: '#2f54eb' }],
-      ['meta', { name: 'og:type', content: 'website' }],
-      [
-        'meta',
-        {
-          name: 'og:title',
-          content: 'Designable 开发者手册',
-        },
-      ],
-      [
-        'meta',
-        {
-          name: 'og:description',
-          content:
-            '从零接入 Designable 表单设计器：对象模型、生命周期、物料注册与 Formily 集成。',
-        },
-      ],
       [
         'script',
         {

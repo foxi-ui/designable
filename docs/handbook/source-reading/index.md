@@ -1,6 +1,6 @@
 ---
-title: Designable 源码阅读（转载）
-description: 陈豪（xjchenhao）的 Designable 源码阅读系列，按作者声明转载并注明出处。
+title: 源码阅读系列（转载）
+description: 陈豪（xjchenhao）的 Designable 源码阅读系列，共 8 篇，覆盖工程结构、运行与二开、全局注册、自定义组件、响应器和常见问题，按作者声明转载并注明出处。
 outline: deep
 ---
 

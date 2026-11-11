@@ -1,6 +1,6 @@
 ---
-title: 生命周期
-description: 设计器从创建、挂载、事件绑定到销毁的完整顺序。
+title: 生命周期：创建、挂载与销毁
+description: 按创建、挂载、事件绑定和销毁的顺序拆解 Engine、Workspace、Viewport 与 React 容器的生命周期，说明 useEffect 与 useLayoutEffect 各自负责什么，以及卸载时如何正确清理事件和实例。
 outline: deep
 ---
 

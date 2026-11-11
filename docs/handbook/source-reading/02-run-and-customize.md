@@ -1,6 +1,6 @@
 ---
-title: 运行与二开
-description: 如何运行 Designable 工程并进行二次开发。
+title: 运行与二次开发
+description: 介绍如何获取代码、安装依赖并运行 Designable 工程，以及 Ant Design v4 升级 v5、构建分包时 TypeScript 报错、浏览器提示依赖不存在等二次开发常见问题。
 outline: deep
 ---
 

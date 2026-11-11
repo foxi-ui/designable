@@ -1,6 +1,6 @@
 ---
-title: 术语表
-description: Engine、Workbench、Workspace、Operation 等核心术语。
+title: Designable 核心术语表
+description: 统一 Engine、Workbench、Workspace、Operation、TreeNode、Behavior、Resource 等 Designable 核心术语的含义，说明它们之间的从属关系，避免阅读源码和文档时产生歧义。
 outline: deep
 ---
 

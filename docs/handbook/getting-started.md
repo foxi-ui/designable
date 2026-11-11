@@ -1,6 +1,6 @@
 ---
-title: 快速开始
-description: 安装依赖、渲染第一个 Designable 设计器，并理解最小闭环里的生命周期。
+title: 快速开始：最小可运行设计器
+description: 从安装依赖到渲染第一个 Designable 设计器，逐步完成 createDesigner、Designer、Workspace、Viewport 四层容器的最小闭环，并搭建接近 playground 的物料、大纲树、画布与设置面板骨架。
 outline: deep
 ---
 
@@ -128,6 +128,8 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 ```mermaid
 sequenceDiagram
+  accTitle: 最小设计器的挂载顺序
+  accDescr: App 调用 createDesigner 创建 Engine；Designer 在 useEffect 中挂载 Engine；Workspace 确保工作区并创建 Operation 与 History；Viewport 在 useLayoutEffect 中挂载并绑定拖拽、点击与键盘事件。
   participant App
   participant Designer
   participant Workspace

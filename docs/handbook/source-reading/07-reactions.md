@@ -1,6 +1,6 @@
 ---
-title: 响应器的使用
-description: Formily 响应器在设置面板中的使用方式。
+title: 响应器的使用与联动
+description: 介绍 Formily 响应器在 Designable 设置面板中的使用方式，包括函数上下文、常用语句、读取其他组件值、控制显隐与联动，以及常见写法和注意事项。
 outline: deep
 ---
 

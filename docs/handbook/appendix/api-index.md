@@ -1,6 +1,6 @@
 ---
-title: API 索引
-description: 主线包的公开导出索引。
+title: API 索引与用法边界
+description: 按包索引 Designable 主线包的公开导出，标注推荐用法、可用但谨慎和内部实现三类边界，方便从对象模型快速定位到具体 API、参数说明与对应源码位置。
 outline: deep
 ---
 

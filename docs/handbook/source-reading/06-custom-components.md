@@ -1,6 +1,6 @@
 ---
 title: 增加自定义组件
-description: 在 Designable 中注册自定义组件的完整步骤。
+description: 从编辑态和渲染态两个角度讲解如何在 Designable 中注册自定义组件，涵盖模块结构、物料配置、属性面板、画布渲染和与 Formily 字段的对接步骤。
 outline: deep
 ---
 

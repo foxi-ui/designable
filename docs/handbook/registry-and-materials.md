@@ -1,6 +1,6 @@
 ---
 title: 注册系统与物料
-description: GlobalRegistry、Behavior、Resource 与设置面板 Schema。
+description: 说明 GlobalRegistry、Behavior、Resource 与设置面板 Schema 的注册机制，掌握如何配置拖拽、属性面板和默认 props，把 Ant Design 组件完整接入 Designable 的物料体系。
 outline: deep
 ---
 

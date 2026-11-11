@@ -66,7 +66,16 @@ info "复制构建产物到 $OUT_DIR"
 cp -R "$PLAYGROUND_BUILD/." "$OUT_DIR/"
 
 # ---------------------------------------------------------------------------
-# 5. 校验产物
+# 5. 写入站点根目录的 SEO 文件
+# ---------------------------------------------------------------------------
+# robots.txt 必须位于域名根目录；文档站自身的 sitemap 由 VitePress 生成到
+# /docs/sitemap.xml，这里的 sitemap.xml 只负责 playground 首页。
+info "写入 robots.txt 与根 sitemap.xml"
+cp "$ROOT_DIR/scripts/static/robots.txt" "$OUT_DIR/robots.txt"
+cp "$ROOT_DIR/scripts/static/sitemap.xml" "$OUT_DIR/sitemap.xml"
+
+# ---------------------------------------------------------------------------
+# 6. 校验产物
 # ---------------------------------------------------------------------------
 info "校验构建产物 ..."
 bash "$ROOT_DIR/scripts/verify-site.sh" "$OUT_DIR"

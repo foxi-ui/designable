@@ -1,6 +1,6 @@
 ---
-title: React 层
-description: Designer 容器、面板、Widgets 与 Hooks。
+title: React 层：容器与面板
+description: 介绍 @designable/react 的 Designer 容器、StudioPanel、CompositePanel、WorkspacePanel 等面板组件、Widgets 与 Hooks，并说明如何组合出与官方 playground 一致的设计器界面。
 outline: deep
 ---
 

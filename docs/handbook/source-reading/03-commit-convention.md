@@ -1,6 +1,6 @@
 ---
-title: designable代码提交规范
-description: Designable 仓库的 commit message 规范。
+title: 代码提交规范与校验
+description: 说明 Designable 仓库基于 cz-conventional-changelog 和 validate-commit-msg 的 commit message 规范，包括提交类型、格式要求、校验流程和常见错误提示。
 outline: deep
 ---
 

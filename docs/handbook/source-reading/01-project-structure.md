@@ -1,6 +1,6 @@
 ---
-title: designable工程结构
-description: Designable 仓库的目录结构与包职责。
+title: Designable 工程结构
+description: 逐层拆解 Designable 仓库的目录结构，说明 examples、formily、packages 各自的职责、根 package.json 与构建脚本的作用，帮助读者快速定位源码和二次开发入口。
 outline: deep
 ---
 

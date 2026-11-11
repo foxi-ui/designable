@@ -1,6 +1,6 @@
 ---
 title: 全局注册与状态管理
-description: GlobalRegistry 的语言、图标与行为注册机制。
+description: 讲解 Designable 的全局语言翻译、Icon SVG 注册与 GlobalRegistry 状态管理，包括 registerDesignerLocales 的配置格式、按语言取值的方法和内置图标配置。
 outline: deep
 ---
 

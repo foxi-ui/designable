@@ -1,6 +1,6 @@
 ---
 title: TreeNode 与编辑操作
-description: 组件树的查询、修改、选择与快照。
+description: 讲解 TreeNode 组件树的查询、遍历、增删改、选中、悬停与快照操作，以及这些编辑操作如何通过 Operation 同步到画布、大纲树、设置面板和撤销重做历史，并给出常用代码示例。
 outline: deep
 ---
 

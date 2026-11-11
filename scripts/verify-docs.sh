@@ -106,4 +106,40 @@ if grep -qE 'https?://localhost|127\.0\.0\.1' "$INDEX"; then
   fail "index.html 中出现了 localhost 地址"
 fi
 
+# ---------------------------------------------------------------------------
+# 6. SEO：sitemap、每页 self canonical 与 description
+# ---------------------------------------------------------------------------
+SITEMAP="$DOCS_DIR/sitemap.xml"
+[ -f "$SITEMAP" ] || fail "缺少 sitemap.xml"
+
+for url in \
+  'https://designable-antd.bugduo.com/docs/' \
+  'https://designable-antd.bugduo.com/docs/architecture.html' \
+  'https://designable-antd.bugduo.com/docs/source-reading/'; do
+  grep -q "<loc>$url</loc>" "$SITEMAP" || fail "sitemap.xml 缺少 URL：$url"
+done
+
+while IFS= read -r file; do
+  rel="${file#"$DOCS_DIR"/}"
+
+  # 404 页面不应被索引，也不应出现在 sitemap 中。
+  if [ "$rel" = "404.html" ]; then
+    grep -q '<meta name="robots" content="noindex">' "$file" \
+      || fail "404.html 缺少 noindex"
+    continue
+  fi
+
+  case "$rel" in
+    index.html) route="" ;;
+    */index.html) route="${rel%index.html}" ;;
+    *) route="$rel" ;;
+  esac
+
+  canonical="https://designable-antd.bugduo.com/docs/$route"
+  grep -q "<link rel=\"canonical\" href=\"$canonical\">" "$file" \
+    || fail "缺少 self canonical：$rel"
+  grep -q '<meta name="description" content="[^"]\{20,\}"' "$file" \
+    || fail "缺少 meta description：$rel"
+done < <(find "$DOCS_DIR" -name '*.html' -type f | sort)
+
 info "校验通过：${DOCS_DIR}（$(find "$DOCS_DIR" -type f | wc -l | tr -d ' ') 个文件）"
