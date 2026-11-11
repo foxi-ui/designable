@@ -30,6 +30,14 @@ export default withMermaid(
             '从零接入 Designable 表单设计器：对象模型、生命周期、物料注册与 Formily 集成。',
         },
       ],
+      [
+        'script',
+        {
+          id: 'vercount-script',
+          defer: '',
+          src: 'https://events.vercount.one/js',
+        },
+      ],
     ],
     markdown: {
       lineNumbers: true,

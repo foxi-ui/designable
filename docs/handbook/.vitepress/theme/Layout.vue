@@ -2,9 +2,15 @@
 import DefaultTheme from 'vitepress/theme'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { onContentUpdated, useData, useRoute } from 'vitepress'
+import PageViews from './PageViews.vue'
+import SiteViews from './SiteViews.vue'
+import { useVercount } from './vercount'
 
 const { frontmatter } = useData()
 const route = useRoute()
+
+useVercount()
+
 const open = ref(false)
 const contentHasOutline = ref(false)
 
@@ -80,6 +86,18 @@ watch(() => route.path, close)
           </svg>
         </button>
       </div>
+    </template>
+
+    <template #doc-footer-before>
+      <PageViews />
+    </template>
+
+    <template #home-hero-actions-after>
+      <SiteViews variant="hero" mirror />
+    </template>
+
+    <template #layout-bottom>
+      <SiteViews variant="footer" with-ids />
     </template>
   </DefaultTheme.Layout>
 
