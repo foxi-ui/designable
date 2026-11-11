@@ -1,10 +1,17 @@
 import React, { useEffect } from 'react'
 import { Space, Button, Radio } from 'antd'
-import { GithubOutlined } from '@ant-design/icons'
+import { GithubOutlined, ReadOutlined } from '@ant-design/icons'
 import { useDesigner, TextWidget } from '@designable/react'
 import { GlobalRegistry } from '@designable/core'
 import { observer } from '@formily/react'
 import { loadInitialSchema, saveSchema } from '../service'
+
+// 生产环境与文档站同域部署，使用 /docs/；本地开发指向文档站预览端口
+const DOCS_URL =
+  typeof window !== 'undefined' &&
+  /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)
+    ? 'http://localhost:4173/docs/'
+    : '/docs/'
 
 export const ActionsWidget = observer(() => {
   const designer = useDesigner()
@@ -34,6 +41,10 @@ export const ActionsWidget = observer(() => {
           GlobalRegistry.setDesignerLanguage(e.target.value)
         }}
       />
+      <Button href={DOCS_URL} target="_blank" rel="noreferrer">
+        <ReadOutlined />
+        文档
+      </Button>
       <Button href="https://github.com/alibaba/designable" target="_blank">
         <GithubOutlined />
         Github
