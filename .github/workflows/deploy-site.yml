@@ -46,8 +46,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: docs/handbook/package-lock.json
+          # 不启用 npm cache：setup-node 会在仓库根执行 npm config，
+          # 而根 package.json 的旧版 devEngines 字段会让 npm 10 报错
 
       - name: Install handbook dependencies
         working-directory: docs/handbook
