@@ -18,6 +18,9 @@ const createPages = (pages) => {
 export default {
   ...baseConfig,
   mode: 'production',
+  // 生产产物不需要 inline source map：它会额外增加约 3MB 体积。
+  // 开发配置（webpack.dev.ts）仍保留 baseConfig 中的 source map。
+  devtool: false,
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',

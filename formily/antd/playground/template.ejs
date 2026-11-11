@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
     Designable Playground
   </title>
@@ -13,8 +16,15 @@
 <body>
   <div id="root">
   </div>
-  <script src="https://unpkg.com/moment/min/moment-with-locales.js"></script>
-  <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/antd/dist/antd-with-locales.min.js"></script>
+  <!--
+    These dependencies are webpack externals (see webpack.base.ts) and must be
+    pinned. Floating "latest" URLs break: react 19 no longer ships UMD builds
+    and antd 5+ is incompatible with this playground. Keep these versions in
+    sync with the installed packages (react/react-dom 17.x, antd 4.x).
+  -->
+  <script src="https://unpkg.com/moment@2.29.1/min/moment-with-locales.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/antd@4.19.3/dist/antd-with-locales.min.js"></script>
 </body>
+</html>
