@@ -1,4 +1,4 @@
-name: Deploy Playground
+name: Deploy Playground and Handbook
 
 on:
   push:
@@ -21,6 +21,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # VitePress lastUpdated 需要完整 git 历史
+          fetch-depth: 0
 
       - name: Setup Node 16
         uses: actions/setup-node@v4
@@ -38,6 +41,31 @@ jobs:
 
       - name: Verify site
         run: bash scripts/verify-site.sh doc-site
+
+      - name: Setup Node 22 for handbook
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: docs/handbook/package-lock.json
+
+      - name: Install handbook dependencies
+        working-directory: docs/handbook
+        run: npm ci
+
+      - name: Build handbook
+        working-directory: docs/handbook
+        run: npm run build
+
+      - name: Merge handbook into site
+        run: |
+          mkdir -p doc-site/docs
+          cp -R docs/handbook/.vitepress/dist/. doc-site/docs/
+          test -f doc-site/index.html
+          test -f doc-site/docs/index.html
+
+      - name: Verify handbook
+        run: bash scripts/verify-docs.sh doc-site/docs
 
       - name: Add CNAME and .nojekyll
         run: |
