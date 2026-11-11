@@ -93,11 +93,7 @@ watch(() => route.path, close)
     </template>
 
     <template #home-hero-actions-after>
-      <SiteViews variant="hero" mirror />
-    </template>
-
-    <template #layout-bottom>
-      <SiteViews variant="footer" with-ids />
+      <SiteViews />
     </template>
   </DefaultTheme.Layout>
 

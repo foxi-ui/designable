@@ -131,27 +131,60 @@
   line-height: 1.6;
 }
 
+/* Vercount 加载占位：三个点上下跳动 */
+.vercount-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.vercount-loading i {
+  flex: none;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: vercount-bounce 1.2s ease-in-out infinite;
+}
+
+.vercount-loading i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.vercount-loading i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes vercount-bounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vercount-loading i {
+    animation: none;
+  }
+}
+
 .vercount-site-views {
-  margin: 0;
+  margin: 16px 0 0;
   color: var(--vp-c-text-3);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 20px;
   text-align: center;
 }
 
-.vercount-site-views--footer {
-  padding: 20px 24px;
-  border-top: 1px solid var(--vp-c-gutter);
-  background-color: var(--vp-c-bg);
-}
-
-.vercount-site-views--hero {
-  margin-top: 16px;
-  font-size: 13px;
-}
-
 @media (min-width: 960px) {
-  .vercount-site-views--hero {
+  .vercount-site-views {
     text-align: left;
   }
 }

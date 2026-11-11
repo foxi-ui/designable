@@ -35,29 +35,6 @@ const formatCounter = (element: Element) => {
 }
 
 /**
- * The hero line lives above the footer in the DOM, so it cannot share the
- * `vercount_value_*` IDs (Vercount updates a single element per ID). Mirror the
- * footer values into the hero line instead.
- */
-const syncMirrors = () => {
-  const mirrors = [
-    ['site_pv', 'vercount_value_site_pv'],
-    ['site_uv', 'vercount_value_site_uv'],
-  ] as const
-
-  for (const [key, id] of mirrors) {
-    const value = document.getElementById(id)?.textContent
-    if (value == null) continue
-
-    document
-      .querySelectorAll(`[data-vercount-mirror="${key}"]`)
-      .forEach((element) => {
-        if (element.textContent !== value) element.textContent = value
-      })
-  }
-}
-
-/**
  * Vercount writes raw integers into the `vercount_value_*` spans. Reformat them
  * with thousands separators, both for values already rendered and for later
  * updates from each script reload.
@@ -67,12 +44,9 @@ const observeCounters = () => {
     document
       .querySelectorAll(`[id^="${COUNTER_ID_PREFIX}"]`)
       .forEach(formatCounter)
-    syncMirrors()
   }
 
   const observer = new MutationObserver((mutations) => {
-    let shouldSync = false
-
     for (const mutation of mutations) {
       const element =
         mutation.type === 'characterData'
@@ -84,11 +58,8 @@ const observeCounters = () => {
         element.id.startsWith(COUNTER_ID_PREFIX)
       ) {
         formatCounter(element)
-        shouldSync = true
       }
     }
-
-    if (shouldSync) syncMirrors()
   })
 
   observer.observe(document.body, {
@@ -120,10 +91,8 @@ export const useVercount = () => {
   watch(
     () => route.path,
     async () => {
-      // Let VitePress render the new page before mirroring values into the
-      // hero line and letting the script cache its spans.
+      // Let VitePress render the new page before the script caches its spans.
       await nextTick()
-      syncMirrors()
       reloadScript()
     },
     { flush: 'post' }
